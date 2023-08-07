@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Temperature>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>List</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+    @foreach (var item in ViewBag.MyList)
+    {
+        @item.temp_id
+        @item.temp_value
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
