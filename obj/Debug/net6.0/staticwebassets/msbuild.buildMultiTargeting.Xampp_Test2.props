@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Xampp_Test2.props" />
+</Project>

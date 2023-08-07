@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{1BC6B90A-71B4-4DF1-B9A3-FAC73F9DAE36}|Default" GitUserInfo="UsingMD">
+  <MonoDevelop.Ide.ItemProperties.Xampp__Test2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/adamgeraghty/projects/FinalProject/FinalProject/Xampp_Test2/Controllers/TemperatureController.cs" relfile="Controllers/TemperatureController.cs" line="17" column="1" />
+      <Breakpoint file="/Users/adamgeraghty/projects/FinalProject/FinalProject/Xampp_Test2/Controllers/TemperatureController.cs" relfile="Controllers/TemperatureController.cs" line="18" column="1" />
+      <Breakpoint file="/Users/adamgeraghty/projects/FinalProject/FinalProject/Xampp_Test2/Controllers/TemperatureController.cs" relfile="Controllers/TemperatureController.cs" line="27" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Temperature.cs">
+    <Files>
+      <File FileName="Controllers/TemperatureController.cs" />
+      <File FileName="Models/Temperature.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Xampp_Test2">
+            <Node name="Xampp_Test2">
+              <Node name="Controllers" expanded="True" />
+              <Node name="README.md" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
