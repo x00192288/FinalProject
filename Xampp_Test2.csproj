@@ -21,8 +21,10 @@
 
   <ItemGroup>
     <None Remove="Views\Temperature\" />
+    <None Remove="Views\AirApi\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Temperature\" />
+    <Folder Include="Views\AirApi\" />
   </ItemGroup>
 </Project>

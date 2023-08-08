@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/adamgeraghty/projects/FinalProject/FinalProject
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/adamgeraghty/projects/FinalProject/FinalProject/Views/AirApi/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWlyQXBpL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/adamgeraghty/projects/FinalProject/FinalProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
