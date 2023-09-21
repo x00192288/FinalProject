@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/adamgeraghty/projects/FinalProject/FinalProject/Xampp_Test2.csproj": {}
+    "/Users/adamgeraghty/FinalProject_Csharp/Xampp_Test2.csproj": {}
   },
   "projects": {
-    "/Users/adamgeraghty/projects/FinalProject/FinalProject/Xampp_Test2.csproj": {
+    "/Users/adamgeraghty/FinalProject_Csharp/Xampp_Test2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/adamgeraghty/projects/FinalProject/FinalProject/Xampp_Test2.csproj",
+        "projectUniqueName": "/Users/adamgeraghty/FinalProject_Csharp/Xampp_Test2.csproj",
         "projectName": "Xampp_Test2",
-        "projectPath": "/Users/adamgeraghty/projects/FinalProject/FinalProject/Xampp_Test2.csproj",
+        "projectPath": "/Users/adamgeraghty/FinalProject_Csharp/Xampp_Test2.csproj",
         "packagesPath": "/Users/adamgeraghty/.nuget/packages/",
-        "outputPath": "/Users/adamgeraghty/projects/FinalProject/FinalProject/obj/",
+        "outputPath": "/Users/adamgeraghty/FinalProject_Csharp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/adamgeraghty/.nuget/NuGet/NuGet.Config"

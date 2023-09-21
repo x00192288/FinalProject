@@ -12,6 +12,8 @@ namespace Xampp_Test2.Controllers
 {
     public class AirApiController : Controller
     {
+       
+       
         // GET: AirApiController
         public ActionResult Details()
         {

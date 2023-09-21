@@ -4,20 +4,27 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<script>
+   
+
+</script>
+<h1>API Values</h1>
 
 <div>
-    <h4>List</h4>
-    <hr />
-    <dl class="row">
-    </dl>
-    @*@foreach (var item in ViewBag.MyList)
+    <button class="inners" value="@ViewBag.Counter">@ViewBag.Counter</button>
+    
+
+
+
+    @if (ViewBag.id == null | ViewBag.value == null )
     {
-        @item.api_id
-        @item.response
-    }*@
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+        @Html.Raw($"<br> No values to display")
+    }
+    else
+    {
+        @Html.Raw($"<br> id = {ViewBag.id}");
+        @Html.Raw($"<br > value = {ViewBag.value}</ br >");
+    }
+
+    @*<a asp-action="Index">Back to List</a>*@
 </div>

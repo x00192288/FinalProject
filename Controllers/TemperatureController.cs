@@ -42,6 +42,7 @@ namespace Xampp_Test2.Controllers
                         Console.WriteLine(myReader.GetString(0) + " - " + myReader.GetString(1));
                         ViewBag.id = (myReader.GetString(0));
                         ViewBag.value = (myReader.GetString(1));
+
                     }
                 }
                 else

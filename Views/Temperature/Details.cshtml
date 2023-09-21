@@ -4,20 +4,41 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+
+
+
+<script>
+   
+
+
+
+</script>
+<h1>Sensor Values</h1>
 
 <div>
     <h4>List</h4>
     <hr />
     <dl class="row">
-    </dl>
+    @*</dl>
     @foreach (var item in ViewBag.MyList)
     {
         @item.temp_id
         @item.temp_value
-    }
+    }*@
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <button type="button" onclick="location.href='@Url.Action("Details", "Temperature")'">Get Values</button>
+
+
+    @if (ViewBag.id == null | ViewBag.value == null)
+    {
+        @Html.Raw($"<br> No values to display")
+    }
+    else
+    {
+        @Html.Raw($"<br> id = {ViewBag.id}");
+        @Html.Raw($"<br > value = {ViewBag.value}</ br >");
+    }
+
+    @*<a asp-action="Index">Back to List</a>*@
 </div>
