@@ -1,0 +1,40 @@
+﻿@model int[]
+
+<canvas id="line-chart"></canvas>
+
+<script>
+    var ctx = document.getElementById('line-chart').getContext('2d');
+
+    // Create a line chart using Chart.js
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Enumerable.Range(1, Model.Length))),
+            datasets: [{
+                label: 'Line Chart',
+                data: @Html.Raw(Json.Serialize(Model)),
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Value ID'
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Temperature (C)'
+                    }
+                }
+            }
+        }
+    });
+</script>

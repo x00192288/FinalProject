@@ -1,29 +1,36 @@
 ﻿<Properties StartupConfiguration="{1BC6B90A-71B4-4DF1-B9A3-FAC73F9DAE36}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Xampp__Test2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Home/Index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/VisualisationController.cs">
     <Files>
       <File FileName="Views/AirApi/Details.cshtml" />
       <File FileName="Controllers/AirApiController.cs" />
-      <File FileName="Models/AirApi.cs" />
-      <File FileName="Program.cs" Line="27" Column="1" />
+      <File FileName="Program.cs" />
       <File FileName="web.config" />
-      <File FileName="Views/Shared/_Layout.cshtml" />
-      <File FileName="Views/Home/Index.cshtml" Line="10" Column="1" />
-      <File FileName="Views/Temperature/Details.cshtml" Line="22" Column="25" />
-      <File FileName="Controllers/TemperatureController.cs" Line="56" Column="1" />
+      <File FileName="Views/Shared/_Layout.cshtml" Line="11" Column="1" />
+      <File FileName="Views/Home/Index.cshtml" Line="1" Column="1" />
+      <File FileName="Controllers/TemperatureController.cs" Line="37" Column="38" />
+      <File FileName="Controllers/HomeController.cs" Line="1" Column="1" />
+      <File FileName="Views/Visualisation/Index.cshtml" Line="34" Column="47" />
+      <File FileName="Controllers/ValuesController.cs" Line="53" Column="20" />
+      <File FileName="Views/Temperature/Details.cshtml" Line="1" Column="1" />
+      <File FileName="Models/Temperature.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Xampp_Test2">
             <Node name="Xampp_Test2">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="AirApi" expanded="True" />
-                <Node name="Home" expanded="True">
-                  <Node name="Index.cshtml" selected="True" />
-                </Node>
+              <Node name="Controllers" expanded="True">
+                <Node name="VisualisationController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Views">
+                <Node name="Shared" expanded="True" />
                 <Node name="Temperature" expanded="True" />
+                <Node name="Visualisation" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -31,15 +38,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/adamgeraghty/FinalProject_Csharp/Controllers/TemperatureController.cs" relfile="Controllers/TemperatureController.cs" line="34" column="1" />
-      <Breakpoint file="/Users/adamgeraghty/FinalProject_Csharp/Controllers/TemperatureController.cs" relfile="Controllers/TemperatureController.cs" line="38" column="1" />
-      <Breakpoint file="/Users/adamgeraghty/FinalProject_Csharp/Controllers/TemperatureController.cs" relfile="Controllers/TemperatureController.cs" line="49" column="1" />
-      <Breakpoint file="/Users/adamgeraghty/FinalProject_Csharp/Controllers/TemperatureController.cs" relfile="Controllers/TemperatureController.cs" line="56" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
