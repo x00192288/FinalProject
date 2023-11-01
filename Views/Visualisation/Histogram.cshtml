@@ -1,24 +1,49 @@
-﻿@model int[]
-
-<canvas id="line-chart"></canvas>
+﻿<canvas id="line-chart"></canvas>
 
 <script>
     var ctx = document.getElementById('line-chart').getContext('2d');
+
+    // Define the data for the first and second lines
+    var dataLine1 = @Html.Raw(Json.Serialize(Model)); // Data for the first line
+   // dataLine1 = [30,7,2,6,50];
+    var dataLine2 = [4,2,6,7];
 
     // Create a line chart using Chart.js
     var lineChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: @Html.Raw(Json.Serialize(Enumerable.Range(1, Model.Length))),
-            datasets: [{
-                label: 'Line Chart',
-                data: @Html.Raw(Json.Serialize(Model)),
-                fill: false,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2
-            }]
+            datasets: [
+                {
+                    label: 'Line 1', // Label for the first line
+                    data: dataLine1, // Use the first dataset
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Line 2', // Label for the second line
+                    data: dataLine2, // Use the second dataset
+                    fill: false,
+                    borderColor: 'rgba(192, 75, 192, 1)',
+                    borderWidth: 2
+                }
+            ]
         },
         options: {
+            plugins: {
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'xy'
+                    }
+                }
+            },
             scales: {
                 x: {
                     display: true,
