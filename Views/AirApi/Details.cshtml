@@ -1,30 +1,60 @@
-﻿@model IEnumerable<Temperature>
-
-@{
+﻿@{
     ViewData["Title"] = "Details";
 }
 
-<script>
-   
+<h1>Air API</h1>
 
-</script>
-<h1>API Values</h1>
+
+<div id="infoTable">
+    <h4>Latest Value</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="bg-primary text-white">
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-info">
+                    <td>ID</td>
+                    <td>@ViewBag.id</td>
+                </tr>
+                <tr class="table-warning">
+                    <td>City</td>
+                    <td>@ViewBag.city</td>
+                </tr>
+                <tr class="table-danger">
+                    <td>Temperature</td>
+                    <td>@ViewBag.temperature</td>
+                </tr>
+                <tr class="table-info">
+                    <td>Time</td>
+                    <td>@ViewBag.inserttime</td>
+                </tr>
+                <tr class="table-success" style="display:none;">
+                    <td>Value</td>
+                    <td>@ViewBag.value</td>
+                </tr>
+                <tr class="table-success">
+                    <td>Date</td>
+                    <td>@ViewBag.date</td>
+                </tr>
+                <!-- Add more rows for additional ViewBag properties -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<button id="moreInfoBtn" class="btn btn-primary">Show More Info</button>
+
+<script>document.getElementById('moreInfoBtn').addEventListener('click', function () {
+        var valueRow = document.querySelector('tr.table-success');
+        valueRow.style.display = valueRow.style.display === 'none' ? 'table-row' : 'none';
+    });</script>
 
 <div>
-    <button class="inners" value="@ViewBag.Counter">@ViewBag.Counter</button>
-    
-
-
-
-    @if (ViewBag.id == null | ViewBag.value == null )
-    {
-        @Html.Raw($"<br> No values to display")
-    }
-    else
-    {
-        @Html.Raw($"<br> id = {ViewBag.id}");
-        @Html.Raw($"<br > value = {ViewBag.value}</ br >");
-    }
-
-    @*<a asp-action="Index">Back to List</a>*@
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
 </div>

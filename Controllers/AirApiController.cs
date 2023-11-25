@@ -12,28 +12,27 @@ namespace Xampp_Test2.Controllers
 {
     public class AirApiController : Controller
     {
-       
-       
         // GET: AirApiController
         public ActionResult Details()
         {
             List<AirApi> airs = new List<AirApi>();
-           // var builder = new ConfigurationBuilder();
-           // builder.AddJsonFile("appsettings.json");
+            // var builder = new ConfigurationBuilder();
+            // builder.AddJsonFile("appsettings.json");
             //var configuration = builder.Build();
             //IConfiguration configuration = builder.Build();
 
-           // string mainconn = configuration.GetConnectionString("MyConnection");
+            // string mainconn = configuration.GetConnectionString("MyConnection");
 
             //string mainconn = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;'
             MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=db_air_api;uid=Arduino;password=x0192288!;SSLMode=none;");
-            string sqlquery = "select * from air_api";
-            
-            MySqlCommand sqlcomm = new MySqlCommand(sqlquery,mySqlConnection);
+            string sqlquery = "SELECT * FROM air_api ORDER BY api_id DESC LIMIT 1";
+
+            MySqlCommand sqlcomm = new MySqlCommand(sqlquery, mySqlConnection);
             sqlcomm.CommandTimeout = 60;
             //MySqlDataReader sdr = sqlcomm.ExecuteReader();
 
-            try {
+            try
+            {
                 mySqlConnection.Open();
                 MySqlDataReader myReader = sqlcomm.ExecuteReader();
                 if (myReader.HasRows)
@@ -44,6 +43,15 @@ namespace Xampp_Test2.Controllers
                         Console.WriteLine(myReader.GetString(0) + " - " + myReader.GetString(1));
                         ViewBag.id = (myReader.GetString(0));
                         ViewBag.value = (myReader.GetString(1));
+                        ViewBag.city = (myReader.GetString(2));
+                        ViewBag.temperature = (myReader.GetString(3));
+                        ViewBag.inserttime = (myReader.GetString(4));
+                        ViewBag.date = (myReader.GetString(5));
+
+
+
+
+
                     }
                 }
                 else
@@ -53,11 +61,11 @@ namespace Xampp_Test2.Controllers
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Query error " + e.Message);
             }
-        
+
             return View();
         }
 

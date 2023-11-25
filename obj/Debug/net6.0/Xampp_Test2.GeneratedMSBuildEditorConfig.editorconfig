@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGVtcGVyYXR1cmUvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/adamgeraghty/FinalProject_Csharp/Views/TemperatureTable/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGVtcGVyYXR1cmVUYWJsZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/adamgeraghty/FinalProject_Csharp/Views/Visualisation/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmlzdWFsaXNhdGlvbi9FcnJvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

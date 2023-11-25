@@ -17,16 +17,19 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
     <PackageReference Include="MySql.Data" Version="8.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Views\Temperature\" />
     <None Remove="Views\AirApi\" />
     <None Remove="Views\Visualisation\" />
+    <None Remove="Views\TemperatureTable\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Temperature\" />
     <Folder Include="Views\AirApi\" />
     <Folder Include="Views\Visualisation\" />
+    <Folder Include="Views\TemperatureTable\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,44 @@
+﻿@model List<Xampp_Test2.Models.TemperatureTable>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>API Values</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No values to display</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>AQI</th>
+                <th>Dominant Pollutant</th>
+                <th>Humidity</th>
+                <th>NO2</th>
+                <th>O3</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var temperature in Model)
+            {
+                <tr>
+                    <td>@temperature.Data.City.Name</td>
+                    <td>@temperature.Data.Aqi</td>
+                    <td>@temperature.Data.DominantPollutant</td>
+                    <td>@temperature.Data.Iaqi.H.V</td>
+                    <td>@temperature.Data.Iaqi.No2.V</td>
+                    <td>@temperature.Data.Iaqi.O3.V</td>
+                    <td>@temperature.Data.Time.S</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Your existing HTML code -->
