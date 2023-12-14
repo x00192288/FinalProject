@@ -10,9 +10,16 @@
 
     <button type="submit">Filter Data</button>
 </form>
+@if (ViewBag.TimestampYear != null | ViewBag.TimestampMonth != null | ViewBag.TimestampDay != null)
+{
+    <p>Selected Timestamp: @($"{ViewBag.TimestampYear}-{ViewBag.TimestampMonth}-{ViewBag.TimestampDay}")</p>
+}
+else
+{
+    <p>Displaying latest values</p>
+}
 
-<script>
-    function validateForm() {
+<script>function validateForm() {
         var year = document.getElementById("timestampYear").value;
         var month = document.getElementById("timestampMonth").value;
         var day = document.getElementById("timestampDay").value;
@@ -33,10 +40,9 @@
     }
 
     // Refresh the form every 30000 milliseconds (30 seconds)
-    setInterval(function() {
+    setInterval(function () {
         document.getElementById("filterForm").submit();
-    }, 30000);
-</script>
+    }, 30000);</script>
 
 
 
@@ -137,7 +143,7 @@ else
         var lineChart2 = new Chart(ctx2, {
             type: 'line',
             data: {
-                labels: @Html.Raw(Json.Serialize(Enumerable.Range(1, 5))),
+                labels: @Html.Raw(Json.Serialize(Enumerable.Range(1, 10))),
                 datasets: [
                     {
                         label: 'Sensor', // Label for the first line

@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Xampp_Test2.Controllers
@@ -16,6 +17,9 @@ namespace Xampp_Test2.Controllers
     {
         public IActionResult Histogram(string timestampYear, string timestampMonth, string timestampDay)
         {
+            ViewBag.TimestampYear = timestampYear;
+            ViewBag.TimestampMonth = timestampMonth;
+            ViewBag.TimestampDay = timestampDay;
             string timestamp = "";
 
             // Construct timestamp string based on provided inputs
@@ -34,7 +38,7 @@ namespace Xampp_Test2.Controllers
                 timestamp += $"-{timestampDay.PadLeft(2, '0')}";
             }
 
-            
+
             DateTime? filterTimestamp = null;
             if (DateTime.TryParseExact(timestamp, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedTimestamp))
             {
@@ -73,7 +77,7 @@ namespace Xampp_Test2.Controllers
                     string apiSqlQuery = "SELECT temperature FROM air_api WHERE temperature IS NOT NULL";
                     List<float> apiData = SQLQuery("db_air_api", apiSqlQuery);
 
-                   
+
 
                     if (apiData != null && apiData.Count > 0)
                     {
@@ -134,7 +138,7 @@ namespace Xampp_Test2.Controllers
                     {
                         return View("Error");
                     }
-                    
+
                 }
             }
             catch (Exception e)
@@ -213,4 +217,3 @@ namespace Xampp_Test2.Controllers
 
     }
 }
-

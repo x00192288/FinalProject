@@ -1,38 +1,97 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Xampp_Test2.Models;
+﻿using Xampp_Test2.Models;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Xampp_Test2.Controllers
 {
+
+    public interface IDbConnectionWrapper : IDisposable
+    {
+        void Open();
+        void Close();
+        MySqlCommand CreateCommand();
+    }
+
+    public class MySqlConnectionWrapper : IDbConnectionWrapper
+    {
+        private readonly MySqlConnection _mySqlConnection;
+
+        public MySqlConnectionWrapper(string connectionString)
+        {
+            _mySqlConnection = new MySqlConnection(connectionString);
+        }
+
+        public void Open()
+        {
+            _mySqlConnection.Open();
+        }
+
+        public void Close()
+        {
+            _mySqlConnection.Close();
+        }
+
+        public MySqlCommand CreateCommand()
+        {
+            return _mySqlConnection.CreateCommand();
+        }
+
+        public void Dispose()
+        {
+            _mySqlConnection.Dispose();
+        }
+    }
+
     public class TemperatureController : Controller
     {
+        private readonly IDbConnectionWrapper _mySqlConnection;
+
+        public TemperatureController([FromServices] IDbConnectionWrapper temperatureDbConnection)
+        {
+            _mySqlConnection = temperatureDbConnection ?? throw new ArgumentNullException(nameof(temperatureDbConnection));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // Dispose of managed resources here
+                _mySqlConnection?.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+
         // GET: TemperatureController
         public ActionResult Details()
         {
             List<Temperature> temps = new List<Temperature>();
-           // var builder = new ConfigurationBuilder();
-           // builder.AddJsonFile("appsettings.json");
+            // var builder = new ConfigurationBuilder();
+            // builder.AddJsonFile("appsettings.json");
             //var configuration = builder.Build();
             //IConfiguration configuration = builder.Build();
 
-           // string mainconn = configuration.GetConnectionString("MyConnection");
+            // string mainconn = configuration.GetConnectionString("MyConnection");
 
             //string mainconn = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;'
-            MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=db_arduino;uid=Arduino;password=x0192288!;SSLMode=none;");
+            // MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=db_arduino;uid=Arduino;password=x0192288!;SSLMode=none;");
             string sqlquery = "select * from tbl_temp";
-            
-            MySqlCommand sqlcomm = new MySqlCommand(sqlquery,mySqlConnection);
+
+            MySqlCommand sqlcomm = _mySqlConnection.CreateCommand();
+            sqlcomm.CommandText = sqlquery;
+
             sqlcomm.CommandTimeout = 60;
             //MySqlDataReader sdr = sqlcomm.ExecuteReader();
 
-            try {
-                mySqlConnection.Open();
+            try
+            {
+                _mySqlConnection.Open();
                 MySqlDataReader myReader = sqlcomm.ExecuteReader();
                 if (myReader.HasRows)
                 {
@@ -52,11 +111,18 @@ namespace Xampp_Test2.Controllers
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Query error " + e.Message);
             }
-        
+
+            finally
+            {
+                // Close the connection in a finally block to ensure it's closed even if an exception occurs
+                _mySqlConnection.Close();
+            }
+
+
             return View();
         }
 
