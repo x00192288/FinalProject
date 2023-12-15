@@ -1,21 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Xampp_Test2.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using System.Configuration;
+using Newtonsoft.Json;
+using Org.BouncyCastle.Utilities;
 using System;
-using System.Data;
-using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using Xampp_Test2.Models;
 
 namespace Xampp_Test2.Controllers
 {
-    public class AirApiController : Controller
+    public class TemperatureTableController : Controller
     {
-        // GET: AirApiController
-        public ActionResult Details()
+        public IActionResult Index()
         {
-            List<AirApi> airs = new List<AirApi>();
+            List<TemperatureTable> airs = new List<TemperatureTable>();
             // var builder = new ConfigurationBuilder();
             // builder.AddJsonFile("appsettings.json");
             //var configuration = builder.Build();
@@ -25,7 +22,7 @@ namespace Xampp_Test2.Controllers
 
             //string mainconn = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;'
             MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=db_air_api;uid=Arduino;password=x0192288!;SSLMode=none;");
-            string sqlquery = "SELECT * FROM air_api ORDER BY api_id DESC LIMIT 1";
+            string sqlquery = "select * from air_api";
 
             MySqlCommand sqlcomm = new MySqlCommand(sqlquery, mySqlConnection);
             sqlcomm.CommandTimeout = 60;
@@ -41,17 +38,15 @@ namespace Xampp_Test2.Controllers
                     while (myReader.Read())
                     {
                         Console.WriteLine(myReader.GetString(0) + " - " + myReader.GetString(1));
-                        ViewBag.id = (myReader.GetString(0));
-                        ViewBag.value = (myReader.GetString(1));
-                        ViewBag.city = (myReader.GetString(2));
-                        ViewBag.temperature = (myReader.GetString(3));
-                        ViewBag.inserttime = (myReader.GetString(4));
-                        ViewBag.date = (myReader.GetString(5));
+                        //ViewBag.id = (myReader.GetString(0));
+                        //ViewBag.value = (myReader.GetString(1));
+                        string jsonString = myReader.GetString(1);
+                        var temperature = JsonConvert.DeserializeObject<TemperatureTable>(jsonString);
 
-
-
-
-
+                        if (temperature != null)
+                        {
+                            airs.Add(temperature);
+                        }
                     }
                 }
                 else
@@ -65,10 +60,12 @@ namespace Xampp_Test2.Controllers
             {
                 Console.WriteLine("Query error " + e.Message);
             }
+            finally
+            {
+                mySqlConnection.Close();
+            }
 
-            return View();
+            return View(airs);
         }
-
-        
     }
 }
