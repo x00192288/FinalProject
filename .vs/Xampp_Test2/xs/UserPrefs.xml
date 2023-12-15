@@ -1,52 +1,50 @@
-﻿<Properties StartupConfiguration="{1BC6B90A-71B4-4DF1-B9A3-FAC73F9DAE36}|Default">
-  <MonoDevelop.Ide.ItemProperties.Xampp__Selenium PreferredExecutionTarget="MonoDevelop.Default" />
+﻿<Properties StartupConfiguration="{7ECF180B-5D5C-427B-A2C0-789785FEE090}|Xampp_Test2">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.AirQuality PreferredExecutionTarget="/Applications/Safari.app" />
+  <Debugger.DebugSourceFolders />
   <MultiItemStartupConfigurations>
     <MultiItemSolutionRunConfiguration Id="Multiple Projects" Name="Multiple Projects">
       <Items>
-        <StartupItem ItemId="{7D1F4953-39A1-4EF1-AAFF-6161D14279EF}" ItemName="Xampp_Selenium" />
-        <StartupItem ItemId="{1BC6B90A-71B4-4DF1-B9A3-FAC73F9DAE36}" ItemName="Xampp_Test2" ConfigurationId="Default" />
+        <StartupItem ItemId="{7ECF180B-5D5C-427B-A2C0-789785FEE090}" ItemName="AirQuality" ConfigurationId="Xampp_Test2" />
+        <StartupItem ItemId="{EB106896-5309-452A-A933-D9F8E85CD848}" ItemName="Selenium" ConfigurationId="Unit Tests" />
+        <StartupItem ItemId="{7A3FF945-8052-42B8-96B5-27476A666608}" ItemName="UnitTests" ConfigurationId="Unit Tests" />
       </Items>
     </MultiItemSolutionRunConfiguration>
     <MultiItemSolutionRunConfiguration Id="Multiple Startup Projects" Name="Multiple Startup Projects">
       <Items>
-        <StartupItem ItemId="{7D1F4953-39A1-4EF1-AAFF-6161D14279EF}" ItemName="Xampp_Selenium" ConfigurationId="Default" />
-        <StartupItem ItemId="{1BC6B90A-71B4-4DF1-B9A3-FAC73F9DAE36}" ItemName="Xampp_Test2" ConfigurationId="Default" />
+        <StartupItem ItemId="{7ECF180B-5D5C-427B-A2C0-789785FEE090}" ItemName="AirQuality" ConfigurationId="Xampp_Test2" />
+        <StartupItem ItemId="{EB106896-5309-452A-A933-D9F8E85CD848}" ItemName="Selenium" ConfigurationId="Unit Tests" />
+        <StartupItem ItemId="{7A3FF945-8052-42B8-96B5-27476A666608}" ItemName="UnitTests" ConfigurationId="Unit Tests" />
       </Items>
     </MultiItemSolutionRunConfiguration>
   </MultiItemStartupConfigurations>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/adamgeraghty/FinalProject_Csharp/Controllers/TemperatureTableController.cs" relfile="Controllers/TemperatureTableController.cs" line="14" column="1" />
+      <Breakpoint file="/Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/Controllers/TemperatureTableController.cs" relfile="AirQualityWebApp/Controllers/TemperatureTableController.cs" line="14" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Xampp__Test2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/AirApi.cs">
+  <DisabledProjects>
+    <String>../UnitTests/UnitTests.csproj</String>
+    <String>AirQuality.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.Workbench ActiveDocument="AirQualityWebApp/AirQuality.csproj">
     <Files>
-      <File FileName="Models/AirApi.cs" Line="1" Column="1" />
-      <File FileName="Views/AirApi/Details.cshtml" />
-      <File FileName="Controllers/AirApiController.cs" />
-      <File FileName="web.config" />
-      <File FileName="wwwroot/css/site.css" />
-      <File FileName="Views/Shared/_Layout.cshtml" />
-      <File FileName="../Xampp_Selenium/API.cs" />
-      <File FileName="../Xampp_Selenium/Visualisation.cs" />
-      <File FileName="../Xampp_Selenium/Sensor.cs" />
-      <File FileName="../Xampp_Selenium/Usings.cs" />
-      <File FileName="Controllers/TemperatureTableController.cs" />
-      <File FileName="Controllers/VisualisationController.cs" />
-      <File FileName="Views/TemperatureTable/Index.cshtml" />
-      <File FileName="Views/Visualisation/Histogram.cshtml" />
-      <File FileName="Controllers/TemperatureController.cs" />
-      <File FileName="Program.cs" />
+      <File FileName="UnitTests/ControllerTests/VisualisationUnitTest.cs" Line="9" Column="6" />
+      <File FileName="UnitTests/ControllerTests/EmptyClass.cs" Line="1" Column="1" />
+      <File FileName="AirQualityWebApp/AirQuality.csproj" Line="28" Column="46" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Xampp_Test2" selected="True" />
+          <Node name="Xampp_Test2" expanded="True">
+            <Node name="AirQuality" selected="True" />
+            <Node name="UnitTests" expanded="True">
+              <Node name="ControllerTests" expanded="True" />
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
