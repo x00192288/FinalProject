@@ -1,0 +1,261 @@
+﻿<form id="filterForm" action="/Visualisation/Histogram" method="get" onsubmit="return validateForm()">
+    <label for="timestampYear">Year: </label>
+    <input type="text" id="timestampYear" name="timestampYear" pattern="\d{4}" placeholder="YYYY">
+
+    <label for="timestampMonth">Month: </label>
+    <input type="text" id="timestampMonth" name="timestampMonth" pattern="\d{1,2}" placeholder="MM">
+
+    <label for="timestampDay">Day: </label>
+    <input type="text" id="timestampDay" name="timestampDay" pattern="\d{1,2}" placeholder="DD">
+
+    <button type="submit">Filter Data</button>
+</form>
+@if (ViewBag.TimestampYear != null | ViewBag.TimestampMonth != null | ViewBag.TimestampDay != null)
+{
+    <p>Selected Timestamp: @($"{ViewBag.TimestampYear}-{ViewBag.TimestampMonth}-{ViewBag.TimestampDay}")</p>
+}
+else
+{
+    <p>Displaying latest values</p>
+}
+
+<script>function validateForm() {
+        var year = document.getElementById("timestampYear").value;
+        var month = document.getElementById("timestampMonth").value;
+        var day = document.getElementById("timestampDay").value;
+
+        // If month is selected, year cannot be blank
+        if (month !== "" && year === "") {
+            alert("Please enter a year if month is selected.");
+            return false;
+        }
+
+        // If day is selected, month cannot be blank
+        if (day !== "" && month === "") {
+            alert("Please enter a month if day is selected.");
+            return false;
+        }
+
+        return true;  // Form submission will proceed
+    }
+
+    // Refresh the form every 30000 milliseconds (30 seconds)
+    setInterval(function () {
+        document.getElementById("filterForm").submit();
+    }, 30000);</script>
+
+
+
+@if (ViewBag.Title == "Error")
+{
+    <div>
+        <h2>Error</h2>
+        <p>There was an error retrieving the data. Database unavailable, please try restarting the database.</p>
+    </div>
+}
+else
+{
+
+
+    <canvas id="line-chart"></canvas>
+    <canvas id="line-chart2"></canvas>
+    <canvas id="line-chart3"></canvas>
+    <script>
+    var ctx = document.getElementById('line-chart').getContext('2d');
+    var ctx2 = document.getElementById('line-chart2').getContext('2d');
+    var ctx3 = document.getElementById('line-chart3').getContext('2d');
+
+
+    //////// need to change which arrays i'm receiving eg add in arduinoarray and apiarray'
+
+    // Define the data for the first and second lines
+    var dataLine1 = @Html.Raw(Json.Serialize(Model)); // Data for the first line
+
+    var dataLine1 = @Html.Raw(Json.Serialize(Model.DataArray)); // Data for the first line
+    var dataLine2 = @Html.Raw(Json.Serialize(Model.DataArray2)); // Data for the second line
+    //dataLine1 = [30,7,2,6,50];
+    //var dataLine2 = [4,2,6,7,18];  // this needs to be the data from the other table
+
+
+
+
+    if (dataLine1 != null && dataLine2 != null) {
+        // Create a line chart using Chart.js
+        var lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Enumerable.Range(1, 5))),
+                datasets: [
+                    {
+                        label: 'Sensor', // Label for the first line
+                        data: dataLine1, // Use the first dataset
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'API', // Label for the second line
+                        data: dataLine2, // Use the second dataset
+                        fill: false,
+                        borderColor: 'rgba(192, 75, 192, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    zoom: {
+                        zoom: {
+                            wheel: {
+                                enabled: true
+                            },
+                            pinch: {
+                                enabled: true
+                            },
+                            mode: 'xy'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Value ID'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Temperature (C)'
+                        },
+                        min: 0,
+                        max: 50   
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
+        var lineChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Enumerable.Range(1, 10))),
+                datasets: [
+                    {
+                        label: 'Sensor', // Label for the first line
+                        data: dataLine1, // Use the first dataset
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    }
+
+                ]
+            },
+            options: {
+                plugins: {
+                    zoom: {
+                        zoom: {
+                            wheel: {
+                                enabled: true
+                            },
+                            pinch: {
+                                enabled: true
+                            },
+                            mode: 'xy'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Value ID'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Temperature (C)'
+                        },
+                        min: 0,
+                        max: 50   
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+        var lineChart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Enumerable.Range(1, 5))),
+                datasets: [
+
+                    {
+                        label: 'API', // Label for the second line
+                        data: dataLine2, // Use the second dataset
+                        fill: false,
+                        borderColor: 'rgba(192, 75, 192, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    zoom: {
+                        zoom: {
+                            wheel: {
+                                enabled: true
+                            },
+                            pinch: {
+                                enabled: true
+                            },
+                            mode: 'xy'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Value ID'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Temperature (C)'
+                        }
+                    }
+                }
+            }
+        });
+    }
+    else {
+        // Display text on the graph saying "No Data"
+        ctx.font = '20px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('No Data', ctx.canvas.width / 2, ctx.canvas.height / 2);
+    }
+    </script>
+}
