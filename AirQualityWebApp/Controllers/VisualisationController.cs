@@ -5,11 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using MySql.Data.MySqlClient;
 
-
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Xampp_Test2.Controllers
 {
@@ -154,66 +150,88 @@ namespace Xampp_Test2.Controllers
 
 
 
-        public List<float> SQLQuery(string database, string query)
-        {
-            List<float> data = new List<float>();
-
-            MySqlConnection mySqlConnection = new MySqlConnection($"server=localhost;database={database};uid=Arduino;password=x0192288!;SSLMode=none;");
-            string sqlquery = query;
-
-            MySqlCommand sqlcomm = new MySqlCommand(sqlquery, mySqlConnection);
-            sqlcomm.CommandTimeout = 60;
-
-            try
+        
+            public List<float> SQLQuery(string database, string query)
             {
-                mySqlConnection.Open();
-                using (MySqlDataReader myReader = sqlcomm.ExecuteReader())
-                {
-                    int columnIndex = 0; // Assuming the desired column is the first one (index 0)
+                List<float> data = new List<float>();
 
-                    // Check if the reader has columns
-                    if (myReader.FieldCount > columnIndex)
+                string connectionString = $"server=finalprojectx00192288.database.windows.net;database=FinalProject;uid=ageraghty;password=x00192288!;";
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    string sqlquery = query;
+
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlquery, sqlConnection))
                     {
-                        while (myReader.Read())
+                        sqlCommand.CommandTimeout = 60;
+
+                        try
                         {
-                            if (!myReader.IsDBNull(columnIndex))
+                            sqlConnection.Open();
+
+                        using (SqlDataReader myReader = sqlCommand.ExecuteReader())
+                        {
+                            int columnIndex = 0; 
+
+                            // Check if the reader has columns
+                            if (myReader.FieldCount > columnIndex)
                             {
-                                float value;
-                                if (float.TryParse(myReader.GetFloat(columnIndex).ToString(), out value))
+                                while (myReader.Read())
                                 {
-                                    data.Add(value);
+                                    if (!myReader.IsDBNull(columnIndex))
+                                    {
+                                        // Handle conversion for both System.Double and System.Decimal
+                                        object rawValue = myReader.GetValue(columnIndex);
+
+                                        if (rawValue is double doubleValue)
+                                        {
+                                            float value = Convert.ToSingle(doubleValue);
+                                            data.Add(value);
+                                        }
+                                        else if (rawValue is decimal decimalValue)
+                                        {
+                                            float value = Convert.ToSingle(decimalValue);
+                                            data.Add(value);
+                                        }
+                                        else if (rawValue is float floatValue)
+                                        {
+                                            // If the value is  a float, add it
+                                            data.Add(floatValue);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine($"Unsupported data type: {rawValue.GetType().FullName}");
+                                        }
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No columns found in the result set.");
                             }
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("No columns found in the result set.");
+                        catch (Exception e)
+                        {
+                            data.Add(999999);
+                            Console.WriteLine("Query error: " + e.Message);
+                        }
                     }
                 }
+                return data;
             }
-            catch (Exception e)
-            {
-                data.Add(999999);
-                Console.WriteLine("Query error: " + e.Message);
-            }
-            finally
-            {
-                mySqlConnection.Close(); // Close the connection when done
-            }
-
-            return data;
         }
-
-
-
-
-
-
-
-
-
-
-
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+

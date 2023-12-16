@@ -1,5 +1,4 @@
 ﻿using Xampp_Test2.Models;
-using MySql.Data.MySqlClient;
 using System.Configuration;
 using System;
 using System.Data;
@@ -14,100 +13,92 @@ namespace Xampp_Test2.Controllers
     {
         void Open();
         void Close();
-        MySqlCommand CreateCommand();
+        SqlCommand CreateCommand();
     }
 
-    public class MySqlConnectionWrapper : IDbConnectionWrapper
+    public class SqlConnectionWrapper : IDbConnectionWrapper
     {
-        private readonly MySqlConnection _mySqlConnection;
+        private readonly SqlConnection _sqlConnection;
 
-        public MySqlConnectionWrapper(string connectionString)
+        public SqlConnectionWrapper(string connectionString)
         {
-            _mySqlConnection = new MySqlConnection(connectionString);
+            _sqlConnection = new SqlConnection(connectionString);
         }
 
         public void Open()
         {
-            _mySqlConnection.Open();
+            _sqlConnection.Open();
         }
 
         public void Close()
         {
-            _mySqlConnection.Close();
+            _sqlConnection.Close();
         }
 
-        public MySqlCommand CreateCommand()
+        public SqlCommand CreateCommand() 
         {
-            return _mySqlConnection.CreateCommand();
+            return _sqlConnection.CreateCommand();
         }
 
         public void Dispose()
         {
-            _mySqlConnection.Dispose();
+            _sqlConnection.Dispose();
         }
     }
 
     public class TemperatureController : Controller
     {
-        private readonly IDbConnectionWrapper _mySqlConnection;
+        private readonly IDbConnectionWrapper _sqlConnection;
 
         public TemperatureController([FromServices] IDbConnectionWrapper temperatureDbConnection)
         {
-            _mySqlConnection = temperatureDbConnection ?? throw new ArgumentNullException(nameof(temperatureDbConnection));
+            _sqlConnection = temperatureDbConnection ?? throw new ArgumentNullException(nameof(temperatureDbConnection));
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                // Dispose of managed resources here
-                _mySqlConnection?.Dispose();
+                _sqlConnection?.Dispose();
             }
 
             base.Dispose(disposing);
         }
 
 
-        // GET: TemperatureController
         public ActionResult Details()
         {
             List<Temperature> temps = new List<Temperature>();
-            // var builder = new ConfigurationBuilder();
-            // builder.AddJsonFile("appsettings.json");
-            //var configuration = builder.Build();
-            //IConfiguration configuration = builder.Build();
-
-            // string mainconn = configuration.GetConnectionString("MyConnection");
-
-            //string mainconn = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;'
-            // MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=db_arduino;uid=Arduino;password=x0192288!;SSLMode=none;");
+           
             string sqlquery = "select * from tbl_temp";
 
-            MySqlCommand sqlcomm = _mySqlConnection.CreateCommand();
+            SqlCommand sqlcomm = _sqlConnection.CreateCommand();
             sqlcomm.CommandText = sqlquery;
 
             sqlcomm.CommandTimeout = 60;
-            //MySqlDataReader sdr = sqlcomm.ExecuteReader();
+            
 
             try
             {
-                _mySqlConnection.Open();
-                MySqlDataReader myReader = sqlcomm.ExecuteReader();
+                _sqlConnection.Open();
+                SqlDataReader myReader = sqlcomm.ExecuteReader();
                 if (myReader.HasRows)
                 {
                     Console.WriteLine("Your query generated results");
                     while (myReader.Read())
                     {
-                        Console.WriteLine(myReader.GetString(0) + " - " + myReader.GetString(1));
-                        ViewBag.id = (myReader.GetString(0));
-                        ViewBag.value = (myReader.GetString(1));
+                        Console.WriteLine(myReader.GetValue(0).ToString() + " - " + myReader.GetValue(1).ToString());
 
+                        ViewBag.id = myReader.GetValue(0).ToString();
+
+                        ViewBag.value = ((double)myReader.GetValue(1)).ToString("N2");
+
+                        
                     }
                 }
                 else
                 {
                     Console.WriteLine("Query successfully executed");
-
                 }
 
             }
@@ -118,81 +109,14 @@ namespace Xampp_Test2.Controllers
 
             finally
             {
-                // Close the connection in a finally block to ensure it's closed even if an exception occurs
-                _mySqlConnection.Close();
+                // Close the connection 
+                _sqlConnection.Close();
             }
 
 
             return View();
         }
 
-        // GET: TemperatureController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-        // GET: TemperatureController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TemperatureController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TemperatureController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TemperatureController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TemperatureController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: TemperatureController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

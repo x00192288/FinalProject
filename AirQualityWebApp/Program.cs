@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(builder.Configuration.GetConnectionString("TemperatureDbConnection")));
 
 builder.Services.AddScoped<IDbConnectionWrapper>(_ =>
-    new MySqlConnectionWrapper(builder.Configuration.GetConnectionString("TemperatureDbConnection")));
+    new SqlConnectionWrapper(builder.Configuration.GetConnectionString("TemperatureDbConnection")));
 
 var app = builder.Build();
 

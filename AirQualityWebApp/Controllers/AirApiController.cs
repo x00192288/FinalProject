@@ -1,74 +1,67 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Xampp_Test2.Models;
-using MySql.Data.MySqlClient;
-using System.Configuration;
-using System;
-using System.Data;
-using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
+using Xampp_Test2.Models;
 
 namespace Xampp_Test2.Controllers
 {
     public class AirApiController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        public AirApiController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         // GET: AirApiController
         public ActionResult Details()
         {
             List<AirApi> airs = new List<AirApi>();
-            // var builder = new ConfigurationBuilder();
-            // builder.AddJsonFile("appsettings.json");
-            //var configuration = builder.Build();
-            //IConfiguration configuration = builder.Build();
 
-            // string mainconn = configuration.GetConnectionString("MyConnection");
+            string connectionString = _configuration.GetConnectionString("TemperatureDbConnection");
 
-            //string mainconn = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;'
-            MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=db_air_api;uid=Arduino;password=x0192288!;SSLMode=none;");
-            string sqlquery = "SELECT * FROM air_api ORDER BY api_id DESC LIMIT 1";
-
-            MySqlCommand sqlcomm = new MySqlCommand(sqlquery, mySqlConnection);
-            sqlcomm.CommandTimeout = 60;
-            //MySqlDataReader sdr = sqlcomm.ExecuteReader();
-
-            try
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                mySqlConnection.Open();
-                MySqlDataReader myReader = sqlcomm.ExecuteReader();
-                if (myReader.HasRows)
+                string sqlquery = "SELECT TOP 1 * FROM air_api ORDER BY api_id DESC";
+
+                using (SqlCommand sqlCommand = new SqlCommand(sqlquery, sqlConnection))
                 {
-                    Console.WriteLine("Your query generated results");
-                    while (myReader.Read())
+                    sqlCommand.CommandTimeout = 60;
+
+                    try
                     {
-                        Console.WriteLine(myReader.GetString(0) + " - " + myReader.GetString(1));
-                        ViewBag.id = (myReader.GetString(0));
-                        ViewBag.value = (myReader.GetString(1));
-                        ViewBag.city = (myReader.GetString(2));
-                        ViewBag.temperature = (myReader.GetString(3));
-                        ViewBag.inserttime = (myReader.GetString(4));
-                        ViewBag.date = (myReader.GetString(5));
-
-
-
-
-
+                        sqlConnection.Open();
+                        SqlDataReader myReader = sqlCommand.ExecuteReader();
+                        if (myReader.HasRows)
+                        {
+                            Console.WriteLine("Your query generated results");
+                            while (myReader.Read())
+                            {
+                                Console.WriteLine(myReader.GetValue(0).ToString() + " - " + myReader.GetValue(1).ToString());
+                                ViewBag.id = (myReader.GetValue(0).ToString());
+                                ViewBag.value = (myReader.GetValue(1).ToString());
+                                ViewBag.city = (myReader.GetValue(2).ToString());
+                                ViewBag.temperature = (myReader.GetValue(3).ToString());
+                                ViewBag.inserttime = (myReader.GetValue(4).ToString());
+                                ViewBag.date = (myReader.GetValue(5).ToString());
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Query successfully executed");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Query error " + e.Message);
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Query successfully executed");
-
-                }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Query error " + e.Message);
             }
 
             return View();
         }
-
-        
     }
 }

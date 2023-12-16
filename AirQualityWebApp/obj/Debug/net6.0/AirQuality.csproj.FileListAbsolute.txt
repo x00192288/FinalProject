@@ -536,3 +536,9 @@
 /Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/obj/Debug/net6.0/AirQuality.pdb
 /Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/obj/Debug/net6.0/AirQuality.genruntimeconfig.cache
 /Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/obj/Debug/net6.0/ref/AirQuality.dll
+/Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/bin/Debug/net6.0/System.Data.SqlClient.dll
+/Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/bin/Debug/net6.0/runtimes/win-arm64/native/sni.dll
+/Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/bin/Debug/net6.0/runtimes/win-x64/native/sni.dll
+/Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/bin/Debug/net6.0/runtimes/win-x86/native/sni.dll
+/Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Users/adamgeraghty/FinalProject_Csharp/AirQualityWebApp/bin/Debug/net6.0/runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll
