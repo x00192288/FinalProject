@@ -39,7 +39,7 @@
                     <td>@ViewBag.value</td>
                 </tr>
                 <tr class="table-success">
-                    <td>Date</td>
+                    <td>Date</td>`
                     <td>@ViewBag.date</td>
                 </tr>
                 <!-- Add more rows for additional ViewBag properties -->
@@ -51,7 +51,15 @@
 
 <script>document.getElementById('moreInfoBtn').addEventListener('click', function () {
         var valueRow = document.querySelector('tr.table-success');
-        valueRow.style.display = valueRow.style.display === 'none' ? 'table-row' : 'none';
+        var buttonText = document.getElementById('moreInfoBtn');
+
+        if (valueRow.style.display === 'none') {
+            valueRow.style.display = 'table-row';
+            buttonText.textContent = 'Show Less Info';
+        } else {
+            valueRow.style.display = 'none';
+            buttonText.textContent = 'Show More Info';
+        }
     });</script>
 
 
