@@ -88,14 +88,14 @@ else
                 datasets: [
                     {
                         label: 'Sensor', // Label for the first line
-                        data: dataLine1, // Use the first dataset
+                        data: dataLine1.slice(-5), // Use the first dataset
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2
                     },
                     {
                         label: 'API', // Label for the second line
-                        data: dataLine2, // Use the second dataset
+                        data: dataLine2.slice(-5), // Use the second dataset
                         fill: false,
                         borderColor: 'rgba(192, 75, 192, 1)',
                         borderWidth: 2
@@ -149,7 +149,7 @@ else
                 datasets: [
                     {
                         label: 'Sensor', // Label for the first line
-                        data: dataLine1, // Use the first dataset
+                        data: dataLine1.slice(-10), // Use the first dataset
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2
@@ -210,7 +210,7 @@ else
 
                     {
                         label: 'API', // Label for the second line
-                        data: dataLine2, // Use the second dataset
+                        data: dataLine2.slice(-5), // Use the second dataset
                         fill: false,
                         borderColor: 'rgba(192, 75, 192, 1)',
                         borderWidth: 2
