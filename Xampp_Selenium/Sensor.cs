@@ -31,19 +31,18 @@ namespace Xampp_Selenium
         [Test]
         public void TestMyApp()
         {
-            // Navigate to your .NET web application
+            // Navigate to .NET web application
             driver.Navigate().GoToUrl("https://localhost:7030/");
 
-            // Perform actions and assertions
+            // Perform actions
             IWebElement element = driver.FindElement(By.CssSelector("a.nav-link.text-dark[href='/Temperature/Details']"));
             element.Click();
-            IWebElement button = driver.FindElement(By.CssSelector("button#moreInfoBtn.btn.btn-primary"));
-
+            IWebElement button = driver.FindElement(By.CssSelector("button.btn.btn-primary"));
             button.Click();
             //  IWebElement element = driver.FindElement(By.Id("yourElementId"));
             //  Assert.IsNotNull(element);
 
-            // Add more test steps as needed
+    
         }
 
         [TearDown]
@@ -51,7 +50,7 @@ namespace Xampp_Selenium
         {
             // Close the browser
             driver?.Quit();
-            driver?.Close();
+         //   driver?.Close();
 
         }
     }

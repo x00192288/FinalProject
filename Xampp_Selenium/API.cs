@@ -32,7 +32,7 @@ namespace Xampp_Selenium
         [Test]
         public void TestMyApp()
         {
-            // Navigate to your .NET web application
+            // Navigate to .NET web application
             driver.Navigate().GoToUrl("https://localhost:7030/");
 
             // Perform actions and assertions
@@ -51,7 +51,7 @@ namespace Xampp_Selenium
         {
             // Close the browser
            driver?.Quit();
-           driver?.Close();
+         //  driver?.Close();
 
         }
     }
