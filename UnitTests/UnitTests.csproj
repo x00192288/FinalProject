@@ -27,11 +27,9 @@
     <ProjectReference Include="..\AirQualityWebApp\AirQuality.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="ControllerTests\" />
     <None Remove="Model Tests\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ControllerTests\" />
     <Folder Include="Model Tests\" />
   </ItemGroup>
 </Project>
